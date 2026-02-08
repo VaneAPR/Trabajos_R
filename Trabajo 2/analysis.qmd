@@ -1,0 +1,64 @@
+---
+title: ""
+author: ""
+format:
+  html:
+    toc: true
+    toc-expand: true
+    toc-depth: 4
+    toc-location: left
+    number-sections: true
+    self-contained: true
+    code-fold: true
+    output-file: "ESM"
+editor_options: 
+  chunk_output_type: console
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+# Project Setup
+
+```{r}
+#| label:  setup
+
+source('https://inkaverse.com/setup.r')
+```
+
+# Data import
+
+```{r}
+gs <- "https://docs.google.com/spreadsheets/d/1NCEGAiDjrGSzBCm_v3vFKE3GMAQRIEl7fpDpf4tt6sQ/edit?gid=873670912#gid=873670912" %>% 
+  as_sheets_id()
+
+fb <- gs %>% 
+  range_read(ss = .,sheet = "fb")
+```
+
+# Análisis de datos
+
+1. Hacer mi diseño experimental
+2. Colectar mis datos
+3. Importar mis datos
+4. Identificar el modelo estadístico
+5. Analisis de variancia (ANOVA o Anva)
+6. Prueba de comparación de medias
+7. Graficar
+
+# Modelo estadístico de la base de datos
+
+$$ y = \mu + Tratamiento + Bloque + e$$
+
+# Incidencia antes de la primera aplicación
+
+$$ iap = \mu + tratamiento + bloque + e$$
+## anova
+
+```{r}
+md <- aov(formula = iap ~ bloque + tratamiento, data = fb)
+
+anova(md)
+```
+
